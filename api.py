@@ -6,13 +6,29 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 auth_manager = SpotifyClientCredentials()
-sp = spotipy.Spotify(auth_manager=auth_manager)
 
 
 def getSongUrls(songArr):
+    sp = spotipy.Spotify(auth_manager=auth_manager)
     urlArr = []
+    if songArr == None:
+        return "Error: No Genre Chosen"
     results = sp.tracks(songArr)
     tracks = results["tracks"]
     for track in tracks:
-        urlArr.append(track["preview_url"])
+        url = track["preview_url"]
+        if url == None:
+            url = "No Preview Available At This Time"
+        urlArr.append(url)
+    return urlArr
+
+
+def getSongTitles(songArr):
+    urlArr = []
+    if songArr == None:
+        return "Error: No Genre Chosen"
+    results = sp.tracks(songArr)
+    tracks = results["name"]
+    for track in tracks:
+        urlArr.append(track["name"])
     return urlArr

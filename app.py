@@ -1,5 +1,12 @@
 import flask
 
+
+rock = []
+pop = []
+country = []
+hiphop = []
+alternative = []
+
 app = flask.Flask(__name__)
 
 # set up a separate route to serve the index.html file generated

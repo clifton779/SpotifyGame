@@ -24,11 +24,12 @@ def getSongUrls(songArr):
 
 
 def getSongTitles(songArr):
+    sp = spotipy.Spotify(auth_manager=auth_manager)
     urlArr = []
     if songArr == None:
         return "Error: No Genre Chosen"
     results = sp.tracks(songArr)
-    tracks = results["name"]
+    tracks = results["tracks"]
     for track in tracks:
         urlArr.append(track["name"])
     return urlArr

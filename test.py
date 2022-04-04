@@ -16,7 +16,7 @@ class GetSongUrls(unittest.TestCase):
         mock_response.tracks.return_value = {
             "tracks": [{"preview_url": "Response"}, {"preview_url": "Response2"}]
         }
-        with patch("api.spotipy.Spotify") as mock_spotify_create:
+        with patch("api.authorization") as mock_spotify_create:
             mock_spotify_create.return_value = mock_response
 
             self.assertEqual(getSongUrls(["Test", "Test2"]), ["Response", "Response2"])
@@ -34,7 +34,7 @@ class GetSongTitles(unittest.TestCase):
         mock_response.tracks.return_value = {
             "tracks": [{"name": "Response"}, {"name": "Response2"}]
         }
-        with patch("api.spotipy.Spotify") as mock_spotify_create:
+        with patch("api.authorization") as mock_spotify_create:
             mock_spotify_create.return_value = mock_response
 
             self.assertEqual(

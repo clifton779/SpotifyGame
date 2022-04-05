@@ -1,0 +1,38 @@
+<html>
+    <head>
+    	<link href="/static/style.css" rel="stylesheet"/>
+    	<style>
+
+         body {
+
+            background-color: #E0FFFF;
+            max-width: 100%;
+            height: auto; 
+         }
+      </style>
+    </head>
+    <body>
+    	<center><div>
+    	<h1 class="headings">Sign Up</h1>
+    	<p>If you haven't already</p>
+        <form class = "formClass" method="POST" action="/signUpPage">
+            <input type="text" name="username" id="username" placeholder="Your username" />
+            <input type="text" name="password" id="password" placeholder="Your password" />
+            <input type="submit" value="Submit!"/>
+        </form>
+       <a href="/loginPage" >Click here to Login!</a>
+  </div></center>
+    </body>
+<script type="text/javascript">
+	
+	var value = {{value}}
+	var page = {{page}}
+	if (page == 1 && value == 1) {
+		alert("User Already Exists. Please use other name. \n If you are the User then Hit Login Page");
+	}
+	else if (page == 2 && value == 0){
+		alert("User does not exists. Sign up now");
+
+	}
+</script>
+</html>

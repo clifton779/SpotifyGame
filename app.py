@@ -29,7 +29,7 @@ def index():
 
 
 @bp.route("/getsongs", methods=["POST", "GET"])
-def getSongs(genre):
+def get_songs(genre):
     arr = []
     urls = []
     names = []
@@ -43,8 +43,8 @@ def getSongs(genre):
         arr = country
     elif genre == "alternative":
         arr = alternative
-    urls = api.getSongUrls(arr)
-    names = api.getSongTitles(arr)
+    urls = api.get_song_urls(arr)
+    names = api.get_song_titles(arr)
     jsondata = []
     for url, name in zip(urls, names):
         jsondata.append({"url": url, "name": name})

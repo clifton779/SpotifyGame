@@ -9,28 +9,28 @@ def authorization():
     return spotipy.Spotify(auth_manager=auth_manager)
 
 
-def getSongUrls(songArr):
-    urlArr = []
-    if songArr == None:
+def get_song_urls(song_arr):
+    url_arr = []
+    if song_arr is None:
         return "Error: No Genre Chosen"
-    sp = authorization()
-    results = sp.tracks(songArr)
+    spotify = authorization()
+    results = spotify.tracks(song_arr)
     tracks = results["tracks"]
     for track in tracks:
         url = track["preview_url"]
-        if url == None:
+        if url is None:
             url = "No Preview Available At This Time"
-        urlArr.append(url)
-    return urlArr
+        url_arr.append(url)
+    return url_arr
 
 
-def getSongTitles(songArr):
-    urlArr = []
-    if songArr == None:
+def get_song_titles(song_arr):
+    url_arr = []
+    if song_arr is None:
         return "Error: No Genre Chosen"
-    sp = authorization()
-    results = sp.tracks(songArr)
+    spotify = authorization()
+    results = spotify.tracks(song_arr)
     tracks = results["tracks"]
     for track in tracks:
-        urlArr.append(track["name"])
-    return urlArr
+        url_arr.append(track["name"])
+    return url_arr

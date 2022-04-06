@@ -44,6 +44,7 @@ country = []
 hiphop = []
 alternative = []
 
+
 @login_manager.user_loader
 def load_user(user_id):
     """This function is used to load user"""
@@ -61,7 +62,7 @@ class User(db.Model, UserMixin):
 
     @property
     def password(self):
-        raise AttributeError('password is not a readable attribute!')
+        raise AttributeError("password is not a readable attribute!")
 
     @password.setter
     def password(self, password):
@@ -72,8 +73,9 @@ class User(db.Model, UserMixin):
 
     # Create A String
     def __repr__(self):
-        return '<Name %r>' % self.name
-    
+        return "<Name %r>" % self.name
+
+
 db.create_all()
 
 
@@ -94,7 +96,7 @@ def start():
 def sign():
     """This function is called on signUpPage to store the form data"""
     # code to validate and add user to database goes here
-    
+
     username = flask.request.form.get("username")
     password_hash = flask.request.form.get("password_hash")
     # if this returns a user, then the username already exists in database
@@ -109,7 +111,9 @@ def sign():
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
     print("im nre user here")
-    new_user = User(username=username, password_hash=generate_password_hash(password_hash))
+    new_user = User(
+        username=username, password_hash=generate_password_hash(password_hash)
+    )
     print(password_hash)
 
     # add the new user to the database
@@ -117,10 +121,44 @@ def sign():
     db.session.commit()
     return flask.render_template("login.html")
 
+
+# login funtionality
 @app.route("/loginPage", methods=["GET", "POST"])
 def login():
     """This function is used to login the user"""
+    if flask.request.method == "POST":
+        data = flask.request.form  # gets username and password inputs
+        query = db.session.query(User.id).filter(
+            User.username == data["username"]
+        )  # get user name from database
+        # checks to see if User is in table
+        in_table = db.session.query(query.exists()).scalar()
+
+        if in_table:  # if in table User user is registered
+            user = User.query.filter_by(username=data["username"]).first()
+
+            # verifying password
+            if check_password_hash(user.password_hash, data["password"]):
+                login_user(user)
+                return flask.redirect(
+                    flask.url_for("profile")
+                )  # login user and redirect to main page
+            else:
+                flask.flash("Wrong password, please try again.")
+        else:
+            flask.flash("Username is invalad.")
+            return flask.redirect(flask.url_for("login"))
+
     return flask.render_template("login.html")
+
+
+# profile page: temporary until connect to react
+@app.route("/profilePage", methods=["GET", "POST"])
+@login_required
+def profile():
+    """This function is used for users to view profile"""
+    return flask.render_template("profile.html")
+
 
 @app.route("/logout")
 @login_required
@@ -156,7 +194,5 @@ def get_songs(genre):
 app.register_blueprint(bp)
 
 app.run(
-    host=os.getenv('IP', '0.0.0.0'),
-    port=int(os.getenv('PORT', '8080')),
-    debug=True
+    host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
 )

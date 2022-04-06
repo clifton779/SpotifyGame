@@ -2,7 +2,7 @@ Flask
 requests
 python-dotenv
 psycopg2-binary
-Flask-SQLAlchemy==2.1
+Flask-SQLAlchemy==2.5.1
 flask-login
 Flask-Migrate
 spotipy

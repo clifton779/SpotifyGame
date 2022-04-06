@@ -7,6 +7,7 @@ import random
 import json
 from dotenv import find_dotenv, load_dotenv
 import flask
+import api
 import requests
 from flask_login import LoginManager, UserMixin
 from flask_login import login_user, login_required, logout_user
@@ -35,6 +36,11 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
+rock = []
+pop = []
+country = []
+hiphop = []
+alternative = []
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -96,6 +102,29 @@ def logout():
     """This function is used to logout"""
     logout_user()
     return flask.redirect(flask.url_for("login"))
+
+
+@bp.route("/getsongs", methods=["POST", "GET"])
+def get_songs(genre):
+    arr = []
+    urls = []
+    names = []
+    if genre == "rock":
+        arr = rock
+    elif genre == "pop":
+        arr = pop
+    elif genre == "hiphop":
+        arr = hiphop
+    elif genre == "country":
+        arr = country
+    elif genre == "alternative":
+        arr = alternative
+    urls = api.get_song_urls(arr)
+    names = api.get_song_titles(arr)
+    jsondata = []
+    for url, name in zip(urls, names):
+        jsondata.append({"url": url, "name": name})
+    return flask.jsonify({"songs": jsondata})
 
 
 app.register_blueprint(bp)

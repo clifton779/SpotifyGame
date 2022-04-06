@@ -1,0 +1,23 @@
+<html>
+    <head>        
+        <title>Profile Page</title>
+        <style>
+            #temp-user{
+                text-align: center;
+                color: blue;
+            }
+        </style>
+    </head>
+
+    <body>
+         <!-- user's name -->
+         <div id="temp-user">
+            {% if current_user.is_authenticated %}
+             <h2>Hi {{ current_user.username }}!</h2>
+            {% endif %}
+         </div>
+         <!-- end user's name -->
+         
+    </body>
+	
+</html>

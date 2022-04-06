@@ -1,38 +1,64 @@
 <html>
     <head>
-    	<link href="/static/style.css" rel="stylesheet"/>
-    	<style>
-
-         body {
-
-            background-color: #E0FFFF;
-            max-width: 100%;
-            height: auto; 
-         }
-      </style>
-    </head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
     <body>
-    	<center><div>
-    	<h1 class="headings">Sign Up</h1>
-    	<p>If you haven't already</p>
-        <form class = "formClass" method="POST" action="/signUpPage">
-            <input type="text" name="username" id="username" placeholder="Your username" />
-            <input type="text" name="password" id="password" placeholder="Your password" />
-            <input type="submit" value="Submit!"/>
+
+      <div class="container">
+      <center><div>
+      <h1 >Sign Up</h1></br>
+      <p>If you haven't already</p></br>
+        <form class="form-group" method="POST" action="/signUpPage">
+         <div>
+              <label for="username">Username</label>
+              <input type="text" class="form-control" name="username" id="username" aria-describedby="username-entry" placeholder="Enter Username">
+             
+            </div></br>
+            <div class="form-group">
+              <label for="password_hash">Password</label>
+              <input type="password" class="form-control" name="password_hash" id="password_hash" placeholder="Enter Password">
+            </div></br>
+            <div class="form-group">
+              <label for="password_hash2">Confirm Password</label>
+              <input type="password" class="form-control" name="password_hash2" id="password_hash2" placeholder="Confirm Password" onkeyup="checkPass();">
+            </div><br/>
+           <input type="submit" id= "submitID" value="Submit!">
+           <p class="missmatch"></p>
         </form>
+
        <a href="/loginPage" >Click here to Login!</a>
   </div></center>
+</div>
     </body>
 <script type="text/javascript">
-	
-	var value = {{value}}
-	var page = {{page}}
-	if (page == 1 && value == 1) {
-		alert("User Already Exists. Please use other name. \n If you are the User then Hit Login Page");
-	}
-	else if (page == 2 && value == 0){
-		alert("User does not exists. Sign up now");
+  
+  var value = {{value}}
+  var page = {{page}}
+  if (page == 1 && value == 1) {
+    alert("User Already Exists. Please use other name. \n If you are the User then Hit Login Page");
+  }
+  else if (page == 2 && value == 0){
+    alert("User does not exists. Sign up now");
 
-	}
+  }
+
+  function checkPass(){
+        console.log("checkpass called")
+         var pass  = document.getElementById("password_hash").value;
+         var conf_pass  = document.getElementById("password_hash2").value;
+         console.log(pass + "   " + conf_pass);
+        if(pass !== conf_pass){
+            document.getElementById("submitID").disabled = true;
+            $('.missmatch').html("Entered Password is not matching!! Try Again");
+        }else{
+            $('.missmatch').html("");
+            document.getElementById("submitID").disabled = false;
+        }
+}
+
 </script>
+
 </html>
+

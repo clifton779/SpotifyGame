@@ -9,3 +9,4 @@ spotipy
 flask_sqlalchemy
 flask_login
 sqlalchemy
+flask

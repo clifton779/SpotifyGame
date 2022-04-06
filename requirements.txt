@@ -6,4 +6,6 @@ Flask-SQLAlchemy==2.1
 flask-login
 Flask-Migrate
 spotipy
-
+flask_sqlalchemy
+flask_login
+sqlalchemy

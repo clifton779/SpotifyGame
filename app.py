@@ -103,19 +103,16 @@ def sign():
     user = User.query.filter_by(username=username).first()
 
     if user:
-        print("im here")
         # if a user is found, we want to redirect back to signup page so user can try again
         flask.session["user_exists"] = True
         flask.session["page"] = 1
         return flask.redirect(flask.url_for("start"))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    print("im nre user here")
     new_user = User(
         username=username, password_hash=generate_password_hash(password_hash)
     )
-    print(password_hash)
-
+    
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
@@ -146,7 +143,7 @@ def login():
             else:
                 flask.flash("Wrong password, please try again.")
         else:
-            flask.flash("Username is invalad.")
+            flask.flash("Username is invalid.")
             return flask.redirect(flask.url_for("login"))
 
     return flask.render_template("login.html")

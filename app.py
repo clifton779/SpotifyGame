@@ -42,6 +42,7 @@ pop = []
 country = []
 hiphop = []
 alternative = []
+genre = []
 
 
 @login_manager.user_loader
@@ -165,20 +166,20 @@ def logout():
 
 
 @bp.route("/getsongs", methods=["POST", "GET"])
-def get_songs(genre):
+def get_songs():
     """From genre, gets song data and returns to react"""
     arr = []
     urls = []
     names = []
-    if genre == "rock":
+    if genre[0] == "rock":
         arr = rock
-    elif genre == "pop":
+    elif genre[0] == "pop":
         arr = pop
-    elif genre == "hiphop":
+    elif genre[0] == "hiphop":
         arr = hiphop
-    elif genre == "country":
+    elif genre[0] == "country":
         arr = country
-    elif genre == "alternative":
+    elif genre[0] == "alternative":
         arr = alternative
     urls = api.get_song_urls(arr)
     names = api.get_song_titles(arr)

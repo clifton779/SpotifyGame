@@ -4,13 +4,12 @@
 import os
 from dotenv import find_dotenv, load_dotenv
 import flask
-import api
-import requests
 from flask_login import LoginManager, UserMixin
 from flask_login import login_user, login_required, logout_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+import api
 
 
 load_dotenv(find_dotenv())
@@ -112,7 +111,7 @@ def sign():
     new_user = User(
         username=username, password_hash=generate_password_hash(password_hash)
     )
-    
+
     # add the new user to the database
     db.session.add(new_user)
     db.session.commit()
@@ -167,6 +166,7 @@ def logout():
 
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs(genre):
+    """From genre, gets song data and returns to react"""
     arr = []
     urls = []
     names = []

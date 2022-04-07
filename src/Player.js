@@ -1,9 +1,12 @@
-export function Player(props) {
-    let url = props.url;
-    if (props.url == null) {
-        url = "defaulturl"
-    }
-    return (
-        <audio hidden id="audio" src={url} autoPlay={true} data-testid="music-player"></audio>
-    );
+import React from 'react';
+import PropTypes from 'prop-types';
+
+export default function Player({ url }) {
+  return (
+    <audio hidden id="audio" src={url} autoPlay data-testid="music-player" />
+  );
 }
+
+Player.propTypes = {
+  url: PropTypes.string.isRequired,
+};

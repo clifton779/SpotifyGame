@@ -1,15 +1,18 @@
+"""Imports spotify python library"""
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import find_dotenv, load_dotenv
 
 
 def authorization():
+    """Gets authorization from API"""
     load_dotenv(find_dotenv())
     auth_manager = SpotifyClientCredentials()
     return spotipy.Spotify(auth_manager=auth_manager)
 
 
 def get_song_urls(song_arr):
+    """Gets song urls"""
     url_arr = []
     if song_arr is None:
         return "Error: No Genre Chosen"
@@ -25,6 +28,7 @@ def get_song_urls(song_arr):
 
 
 def get_song_titles(song_arr):
+    """Gets song titles"""
     url_arr = []
     if song_arr is None:
         return "Error: No Genre Chosen"

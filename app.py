@@ -14,7 +14,7 @@ import api
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__,template_folder='templates')
 
 bp = flask.Blueprint(
     "bp",
@@ -206,7 +206,9 @@ def get_songs():
     print(names)
     jsondata = []
     for url, name in zip(urls, names):
-        jsondata.append({"url": url, "name": name})
+        if not url.find("No Preview Available At This Time") > -1:
+            jsondata.append({"url": url, "name": name})
+            print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 
 

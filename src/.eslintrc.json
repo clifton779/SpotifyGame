@@ -13,8 +13,7 @@
             "rules": {
                 "react/no-array-index-key": "off",
                 "react-hooks/exhaustive-deps": "off",
-                "react/jsx-filename-extension": "off",
-                "jsx-a11y/media-has-caption": "off"
+                "react/jsx-filename-extension": "off"
             }
         }
     ]

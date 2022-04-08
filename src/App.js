@@ -33,7 +33,7 @@ function App() {
       .then((data) => function handle() {
         setMusic(data.songs);
         setSong(music[0].url);
-        setName(music[9].name);
+        setName(music[0].name);
       });
   });
   return (

@@ -1,13 +1,16 @@
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import Player from './Player';
+import Timer from './Timer';
 
 function App() {
+  const [time, setTime] = useState(null);
   const [music, setMusic] = useState([]);
   const [song, setSong] = useState('');
   const [name, setName] = useState('');
   const [guessing, setGuessing] = useState('');
   const inputRef = useRef();
+  const timeRef = useRef(); // to get data from Timer componet
   const [score, setScore] = useState(0);
   const [next, setNext] = useState(0);
   console.log(next);
@@ -23,6 +26,7 @@ function App() {
   };
   // This prompts the user if their guess is right, sets the score, and goes to the next song.
   const handleClick = () => {
+    setTime(timeRef.current.getTime / 1000); // gets time in seconds
     const val = inputRef.current.value;
     if (val === name) {
       setGuessing('Correct!');
@@ -40,6 +44,12 @@ function App() {
     inputRef.current.value = '';
   };
 
+  // reset timer after submit
+  const handleReset = () => {
+    timeRef.current.setTime();
+    timeRef.current.stopTime();
+  };
+
   useEffect(() => {
     fetch('/getSongs')
       .then((response) => response.json())
@@ -52,16 +62,17 @@ function App() {
   return (
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>
+      <h3 lassName="time">{time}</h3>
       <Player url={song} name={name} />
+      <Timer ref={timeRef} />
       <div className="GuessBox">
         <p>{guessing}</p>
         <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />
         <br />
         <br />
-        <button className="GuessButton" type="button" onClick={handleClick}>Submit</button>
+        <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
       </div>
     </div>
-
   );
 }
 

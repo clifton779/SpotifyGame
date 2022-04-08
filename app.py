@@ -164,6 +164,12 @@ def logout():
     logout_user()
     return flask.redirect(flask.url_for("login"))
 
+@bp.route("/choosegenre", methods=["POST","GET"])
+def choose_genre():
+    genre=input("Select a genre! rock, pop, hiphop, country, or alternative?")
+    return genre
+    
+
 
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs(genre):

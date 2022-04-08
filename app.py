@@ -161,7 +161,7 @@ def logout():
 
 @app.route("/choosegenre", methods=["POST", "GET"])
 def choose_genre():
-    genres = ["rock", "pop"]
+    genres = ["    ","rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
         return flask.redirect(flask.url_for("choose_genre"))

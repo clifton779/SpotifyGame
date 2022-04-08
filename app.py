@@ -37,12 +37,42 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-rock = []
-pop = []
-country = []
-hiphop = []
-alternative = []
-genre = []
+rock = [
+    "spotify:track:003vvx7Niy0yvhvHt4a68B",
+    "spotify:track:1QEEqeFIZktqIpPI4jSVSF",
+    "spotify:track:7gSQv1OHpkIoAdUiRLdmI6",
+    "spotify:track:0PsbWiVtix5FoTZ1s00mEl",
+    "spotify:track:2QfiRTz5Yc8DdShCxG1tB2",
+]
+pop = [
+    "spotify:track:2iUmqdfGZcHIhS3b9E9EWq",
+    "spotify:track:0k4d5YPDr1r7FX77VdqWez",
+    "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
+    "spotify:track:1SC5rEoYDGUK4NfG82494W",
+    "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
+]
+country = [
+    "spotify:track:5fdhThPDe6jQQDqCyWrdAn",
+    "spo,tify:track:0LQtEJt7x0s6knb6RKdRYc",
+    "spotify:track:0ZUo4YjG4saFnEJhdWp9Bt",
+    "spotify:track:15DeqWWQB4dcEWzJg15VrN",
+    "spotify:track:6MBUUSIWCzaXW4q58Ktrv9",
+]
+hiphop = [
+    "spotify:track:1DIXPcTDzTj8ZMHt3PDt8p",
+    "spotify:track:6rz0dTA0PdhXImFV5EjM0w",
+    "spotify:track:15JINEqzVMv3SvJTAXAKED",
+    "spotify:track:1oTHteQbmJw15rPxPVXUTv",
+    "spotify:track:5TRPicyLGbAF2LGBFbHGvO",
+]
+alternative = [
+    "spotify:track:6VoIBz0VhCyz7OdEoRYDiA",
+    "spotify:track:4xlEKYv7HmC8zXoJIbpZKM",
+    "spotify:track:4sebUbjqbcgDSwG6PbSGI0",
+    "spotify:track:5vollujufHY0jMZxx77VWr",
+    "spotify:track:305WCRhhS10XUcH6AEwZk6",
+]
+GENRE = "rock"
 
 
 @login_manager.user_loader
@@ -177,15 +207,15 @@ def get_songs():
     arr = []
     urls = []
     names = []
-    if genre[0] == "rock":
+    if GENRE == "rock":
         arr = rock
-    elif genre[0] == "pop":
+    elif GENRE == "pop":
         arr = pop
-    elif genre[0] == "hiphop":
+    elif GENRE == "hiphop":
         arr = hiphop
-    elif genre[0] == "country":
+    elif GENRE == "country":
         arr = country
-    elif genre[0] == "alternative":
+    elif GENRE == "alternative":
         arr = alternative
     urls = api.get_song_urls(arr)
     names = api.get_song_titles(arr)

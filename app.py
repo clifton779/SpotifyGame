@@ -164,7 +164,6 @@ def choose_genre():
     genres = ["rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
-        print(genre)
         return flask.redirect(flask.url_for("choose_genre"))
     return flask.render_template("game.html", genres=genres)
 

@@ -37,7 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-genre = ["rock"]
+genre = ["pop"]
 
 
 @login_manager.user_loader
@@ -179,38 +179,17 @@ def get_songs():
     """From genre, gets song data and returns to react"""
     rock = [
         "spotify:track:1QEEqeFIZktqIpPI4jSVSF",
-        "spotify:track:003vvx7Niy0yvhvHt4a68B",
-        "spotify:track:7gSQv1OHpkIoAdUiRLdmI6",
-        "spotify:track:0PsbWiVtix5FoTZ1s00mEl",
-        "spotify:track:2QfiRTz5Yc8DdShCxG1tB2",
-    ]
-    pop = [
-        "spotify:track:2iUmqdfGZcHIhS3b9E9EWq",
-        "spotify:track:0k4d5YPDr1r7FX77VdqWez",
-        "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
-        "spotify:track:1SC5rEoYDGUK4NfG82494W",
-        "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
-    ]
-    country = [
-        "spotify:track:5fdhThPDe6jQQDqCyWrdAn",
-        "spo,tify:track:0LQtEJt7x0s6knb6RKdRYc",
-        "spotify:track:0ZUo4YjG4saFnEJhdWp9Bt",
-        "spotify:track:15DeqWWQB4dcEWzJg15VrN",
-        "spotify:track:6MBUUSIWCzaXW4q58Ktrv9",
-    ]
-    hiphop = [
-        "spotify:track:1DIXPcTDzTj8ZMHt3PDt8p",
-        "spotify:track:6rz0dTA0PdhXImFV5EjM0w",
-        "spotify:track:15JINEqzVMv3SvJTAXAKED",
-        "spotify:track:1oTHteQbmJw15rPxPVXUTv",
-        "spotify:track:5TRPicyLGbAF2LGBFbHGvO",
-    ]
-    alternative = [
-        "spotify:track:6VoIBz0VhCyz7OdEoRYDiA",
         "spotify:track:4xlEKYv7HmC8zXoJIbpZKM",
         "spotify:track:4sebUbjqbcgDSwG6PbSGI0",
-        "spotify:track:5vollujufHY0jMZxx77VWr",
         "spotify:track:305WCRhhS10XUcH6AEwZk6",
+        "spotify:track:2zYzyRzz6pRmhPzyfMEC8s",
+    ]
+    pop = [
+        "spotify:track:5sbooPcNgIE22DwO0VNGUJ",
+        "spotify:track:0k4d5YPDr1r7FX77VdqWez",
+        "spotify:track:2XU0oxnq2qxCpomAAuJY8K",
+        "spotify:track:0F7FA14euOIX8KcbEturGH",
+        "spotify:track:1tNJrcVe6gwLEiZCtprs1u",
     ]
     urls = []
     names = []
@@ -221,15 +200,6 @@ def get_songs():
     elif genre[0] == "pop":
         urls = api.get_song_urls(pop)
         names = api.get_song_titles(pop)
-    elif genre[0] == "hiphop":
-        urls = api.get_song_urls(hiphop)
-        names = api.get_song_titles(hiphop)
-    elif genre[0] == "country":
-        urls = api.get_song_urls(country)
-        names = api.get_song_titles(country)
-    elif genre[0] == "alternative":
-        urls = api.get_song_urls(alternative)
-        names = api.get_song_titles(alternative)
 
     print(urls)
 

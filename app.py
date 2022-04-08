@@ -24,9 +24,8 @@ bp = flask.Blueprint(
 
 app.config["SECRET_KEY"] = "I have a secret key, wizard!"
 # Point SQLAlchemy to your Heroku database
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL").replace(
-    "://", "ql://", 1
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+#.replace("://", "ql://", 1)
 # Gets rid of a warning
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -226,7 +225,9 @@ def get_songs():
     names = api.get_song_titles(arr)
     jsondata = []
     for url, name in zip(urls, names):
-        jsondata.append({"url": url, "name": name})
+        if not url.find("No Preview Available At This Time") > -1:
+            jsondata.append({"url": url, "name": name})
+            print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 
 

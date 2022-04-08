@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>
-      <Player url={song} name={name} />
+      <Player url={song} />
       <div className="GuessBox">
         <p>{guessing}</p>
         <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />

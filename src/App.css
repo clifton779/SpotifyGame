@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.GuessBox{
+  padding-top: 300px;
+}
+
+.GuessInput{
+ font-size: 15px;
+}
+
+.GuessButton{
+  background-color: aqua;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 70px;
+}

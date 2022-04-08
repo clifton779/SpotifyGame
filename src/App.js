@@ -54,8 +54,6 @@ function App() {
     }
     inputRef.current.value = '';
   };
-
-
   // reset timer after submit
   const handleReset = () => {
     timeRef.current.setTime();
@@ -66,7 +64,7 @@ function App() {
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>
       <h3 lassName="time">{time}</h3>
-      <Player url={song}/>
+      <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">
         <p>{guessing}</p>

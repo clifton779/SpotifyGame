@@ -37,7 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-genre = ["pop"]
+genre = ["rock"]
 
 
 @login_manager.user_loader
@@ -164,7 +164,6 @@ def choose_genre():
     genres = ["rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
-        print(genre)
         return flask.redirect(flask.url_for("choose_genre"))
     return flask.render_template("game.html", genres=genres)
 

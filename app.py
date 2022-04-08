@@ -14,7 +14,7 @@ import api
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__,template_folder='templates')
 
 bp = flask.Blueprint(
     "bp",
@@ -37,42 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-rock = [
-    "spotify:track:003vvx7Niy0yvhvHt4a68B",
-    "spotify:track:1QEEqeFIZktqIpPI4jSVSF",
-    "spotify:track:7gSQv1OHpkIoAdUiRLdmI6",
-    "spotify:track:0PsbWiVtix5FoTZ1s00mEl",
-    "spotify:track:2QfiRTz5Yc8DdShCxG1tB2",
-]
-pop = [
-    "spotify:track:2iUmqdfGZcHIhS3b9E9EWq",
-    "spotify:track:0k4d5YPDr1r7FX77VdqWez",
-    "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
-    "spotify:track:1SC5rEoYDGUK4NfG82494W",
-    "spotify:track:5H0ajL4EHsrcAEGESo2Lzx",
-]
-country = [
-    "spotify:track:5fdhThPDe6jQQDqCyWrdAn",
-    "spo,tify:track:0LQtEJt7x0s6knb6RKdRYc",
-    "spotify:track:0ZUo4YjG4saFnEJhdWp9Bt",
-    "spotify:track:15DeqWWQB4dcEWzJg15VrN",
-    "spotify:track:6MBUUSIWCzaXW4q58Ktrv9",
-]
-hiphop = [
-    "spotify:track:1DIXPcTDzTj8ZMHt3PDt8p",
-    "spotify:track:6rz0dTA0PdhXImFV5EjM0w",
-    "spotify:track:15JINEqzVMv3SvJTAXAKED",
-    "spotify:track:1oTHteQbmJw15rPxPVXUTv",
-    "spotify:track:5TRPicyLGbAF2LGBFbHGvO",
-]
-alternative = [
-    "spotify:track:6VoIBz0VhCyz7OdEoRYDiA",
-    "spotify:track:4xlEKYv7HmC8zXoJIbpZKM",
-    "spotify:track:4sebUbjqbcgDSwG6PbSGI0",
-    "spotify:track:5vollujufHY0jMZxx77VWr",
-    "spotify:track:305WCRhhS10XUcH6AEwZk6",
-]
-GENRE = "rock"
+genre = ["pop"]
 
 
 @login_manager.user_loader
@@ -202,31 +167,55 @@ def choose_genre():
         return flask.redirect(flask.url_for("choose_genre"))
     return flask.render_template("game.html",genres=genres)
 
-@bp.route("/gamepage", methods=["POST","GET"])
+@app.route("/choosegenre", methods=["POST", "GET"])
+def choose_genre():
+    genres = ["rock", "pop"]
+    if flask.request.method == "POST":
+        genre[0] = flask.request.form["genres"]
+        return flask.redirect(flask.url_for("choose_genre"))
+    return flask.render_template("game.html", genres=genres)
+
+
+@bp.route("/gamepage", methods=["POST", "GET"])
 def gamepage():
     return flask.render_template("index.html")
+
 
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs():
     """From genre, gets song data and returns to react"""
-    arr = []
+    rock = [
+        "spotify:track:1QEEqeFIZktqIpPI4jSVSF",
+        "spotify:track:4xlEKYv7HmC8zXoJIbpZKM",
+        "spotify:track:4sebUbjqbcgDSwG6PbSGI0",
+        "spotify:track:305WCRhhS10XUcH6AEwZk6",
+        "spotify:track:2zYzyRzz6pRmhPzyfMEC8s",
+    ]
+    pop = [
+        "spotify:track:5sbooPcNgIE22DwO0VNGUJ",
+        "spotify:track:0k4d5YPDr1r7FX77VdqWez",
+        "spotify:track:2XU0oxnq2qxCpomAAuJY8K",
+        "spotify:track:0F7FA14euOIX8KcbEturGH",
+        "spotify:track:1tNJrcVe6gwLEiZCtprs1u",
+    ]
     urls = []
     names = []
-    if GENRE == "rock":
-        arr = rock
-    elif GENRE == "pop":
-        arr = pop
-    elif GENRE == "hiphop":
-        arr = hiphop
-    elif GENRE == "country":
-        arr = country
-    elif GENRE == "alternative":
-        arr = alternative
-    urls = api.get_song_urls(arr)
-    names = api.get_song_titles(arr)
+    print(genre)
+    if genre[0] == "rock":
+        urls = api.get_song_urls(rock)
+        names = api.get_song_titles(rock)
+    elif genre[0] == "pop":
+        urls = api.get_song_urls(pop)
+        names = api.get_song_titles(pop)
+
+    print(urls)
+
+    print(names)
     jsondata = []
     for url, name in zip(urls, names):
-        jsondata.append({"url": url, "name": name})
+        if not url.find("No Preview Available At This Time") > -1:
+            jsondata.append({"url": url, "name": name})
+            print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 
 

@@ -37,7 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-genre = ["pop"]
+genre = ["rock"]
 
 
 @login_manager.user_loader

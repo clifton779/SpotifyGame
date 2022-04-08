@@ -24,8 +24,9 @@ bp = flask.Blueprint(
 
 app.config["SECRET_KEY"] = "I have a secret key, wizard!"
 # Point SQLAlchemy to your Heroku database
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
-#.replace("://", "ql://", 1)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL").replace(
+    "://", "ql://", 1
+)
 # Gets rid of a warning
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -170,7 +171,7 @@ def choose_genre():
 
 @bp.route("/gamepage", methods=["POST", "GET"])
 def gamepage():
-    return flask.render_template("index.html")
+    return flask.render_template("/src/index.html")
 
 
 @bp.route("/getsongs", methods=["POST", "GET"])

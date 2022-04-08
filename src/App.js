@@ -4,13 +4,24 @@ import Player from './Player';
 
 function App() {
   const [music, setMusic] = useState([]);
-  const [song, setSong] = useState('');
-  const [name, setName] = useState('');
+  const [song, setSong] = useState('default');
+  const [name, setName] = useState('default');
   const [guessing, setGuessing] = useState('');
   const inputRef = useRef();
   const [score, setScore] = useState(0);
   const [next, setNext] = useState(0);
   console.log(next);
+
+  useEffect(() => {
+    fetch('/getsongs')
+      .then((response) => response.json())
+      .then((data) => {
+        setMusic(data.songs);
+        setSong(data.songs[0].url);
+        setName(data.songs[0].name);
+      });
+  }, []);
+
   // This function will increment the song and when it reaches 5 it will reset to 0
   const nextSong = () => {
     if (next === 5) {
@@ -40,15 +51,6 @@ function App() {
     inputRef.current.value = '';
   };
 
-  useEffect(() => {
-    fetch('/getSongs')
-      .then((response) => response.json())
-      .then((data) => function handle() {
-        setMusic(data.songs);
-        setSong(music[0].url);
-        setName(music[0].name);
-      });
-  });
   return (
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>

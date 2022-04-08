@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function Player({ url }) {
   return (
-    <audio hidden id="audio" src={url} autoPlay data-testid="music-player" />
+    <audio id="audio" src={url} autoPlay data-testid="music-player" />
   );
 }
 

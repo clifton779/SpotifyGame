@@ -38,6 +38,7 @@ function App() {
   });
   return (
     <div className="App">
+      <h3 className="ScoreDisplay">{score}</h3>
       <Player url={song} name={name} />
       <div className="GuessBox">
         <p>{guessing}</p>

@@ -159,7 +159,6 @@ def logout():
     logout_user()
     return flask.redirect(flask.url_for("login"))
 
-
 @app.route("/choosegenre", methods=["POST", "GET"])
 def choose_genre():
     genres = ["rock", "pop"]

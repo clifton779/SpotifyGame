@@ -14,7 +14,7 @@ import api
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__,template_folder='templates')
 
 bp = flask.Blueprint(
     "bp",
@@ -171,7 +171,7 @@ def choose_genre():
 
 @bp.route("/gamepage", methods=["POST", "GET"])
 def gamepage():
-    return flask.render_template("/src/index.html")
+    return flask.render_template("index.html")
 
 
 @bp.route("/getsongs", methods=["POST", "GET"])

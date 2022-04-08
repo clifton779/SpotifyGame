@@ -164,12 +164,17 @@ def logout():
     logout_user()
     return flask.redirect(flask.url_for("login"))
 
-@bp.route("/choosegenre", methods=["POST","GET"])
+@app.route("/choosegenre", methods=["POST","GET"])
 def choose_genre():
-    genre=input("Select a genre! rock, pop, hiphop, country, or alternative?")
-    return genre
-    
+    genres= ["rock","pop","hiphop","country","alternative"]
+    if flask.request.method == "POST":
+        genre=flask.request.form["genres"]
+        return flask.redirect(flask.url_for("choose_genre"))
+    return flask.render_template("game.html",genres=genres)
 
+@bp.route("/gamepage", methods=["POST","GET"])
+def gamepage():
+    return flask.render_template("index.html")
 
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs(genre):

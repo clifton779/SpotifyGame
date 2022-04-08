@@ -29,10 +29,12 @@ function App() {
   const nextSong = () => {
     if (next === 5) {
       setNext(0);
-      setSong(music[next]);
+      setSong(music[next].url);
+      setName(music[next].name);
     } else {
       setNext(next + 1);
-      setSong(music[next]);
+      setSong(music[next].url);
+      setName(music[next].name);
     }
   };
   // This prompts the user if their guess is right, sets the score, and goes to the next song.
@@ -54,8 +56,6 @@ function App() {
     }
     inputRef.current.value = '';
   };
-
-
   // reset timer after submit
   const handleReset = () => {
     timeRef.current.setTime();
@@ -66,7 +66,7 @@ function App() {
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>
       <h3 lassName="time">{time}</h3>
-      <Player url={song}/>
+      <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">
         <p>{guessing}</p>

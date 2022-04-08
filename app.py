@@ -196,7 +196,7 @@ def logout():
 
 @app.route("/choosegenre", methods=["POST","GET"])
 def choose_genre():
-    genres= ["rock","pop","hiphop","country","alternative"]
+    genres= ["rock","pop"]
     if flask.request.method == "POST":
         genre=flask.request.form["genres"]
         print(genre)

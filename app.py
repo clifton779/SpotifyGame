@@ -163,12 +163,11 @@ def logout():
     logout_user()
     return flask.redirect(flask.url_for("login"))
 
-
 @login_required
 @app.route("/choosegenre", methods=["POST", "GET"])
 def choose_genre():
-    """Function to set genre"""
-    genres = ["rock", "pop"]
+  """Function to set genre"""
+    genres = ["    ","rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
         return flask.redirect(flask.url_for("choose_genre"))

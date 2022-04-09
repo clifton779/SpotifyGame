@@ -44,6 +44,7 @@ function App() {
     if (val === name) {
       setGuessing('Correct!');
       setScore(score + 1);
+      nextSong();
     } else {
       setGuessing('Wrong Song.');
       setScore(() => {

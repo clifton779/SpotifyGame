@@ -80,15 +80,15 @@ function App() {
       <br />
       <br />
       <div>
-         <a href="choosegenre">  
-              <button type="button">Change genre</button>
-            </a>
+        <a href="choosegenre">
+          <button type="button">Change genre</button>
+        </a>
             &nbsp;
             &nbsp;
-        <a href="logout">  
-              <button type="button">Log Out</button> 
-            </a>
-       </div>
+        <a href="logout">
+          <button type="button">Log Out</button>
+        </a>
+      </div>
     </div>
   );
 }

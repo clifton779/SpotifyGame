@@ -53,5 +53,24 @@ class GetSongTitles(unittest.TestCase):
             )
 
 
+class FlaskTest(unittest.TestCase):
+    # check for response 200
+    def test_index(self):
+        tester = app.test_client(self)
+        response = tester.get("/")
+        statuscode = response.status_code
+        self.assertEqual(statuscode, 200)
+
+    # checks if user is loaded on to page
+    @patch("flask_login.utils._get_user")
+    def test_current_user(self, current_user):
+        user = MagicMock()
+        user.__repr__ = lambda self: "Mr Mocked"
+        current_user.return_value = user
+        client = app.test_client()
+        response = client.get("/profilePage")
+        data = response.data.decode("utf-8")
+
+
 if __name__ == "__main__":
     unittest.main()

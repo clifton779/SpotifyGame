@@ -76,19 +76,19 @@ function App() {
         <br />
         <br />
         <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
-       </div>
-        <br />
-        <br />
-       <div>
-            <a href="choosegenre">  
-            <button type="button">Change genre</button>  
-            </a>
-            &nbsp;
-            &nbsp;
-            <a href="logout">  
-           <button type="button">Log Out</button>  
-            </a>
       </div>
+      <br />
+      <br />
+      <div>
+         <a href="choosegenre">  
+              <button type="button">Change genre</button>
+            </a>
+            &nbsp;
+            &nbsp;
+        <a href="logout">  
+              <button type="button">Log Out</button> 
+            </a>
+       </div>
     </div>
   );
 }

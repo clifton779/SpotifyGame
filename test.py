@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 from api import get_song_urls, get_song_titles
+from app import app
 
 
 class GetSongUrls(unittest.TestCase):
@@ -50,6 +51,25 @@ class GetSongTitles(unittest.TestCase):
             self.assertEqual(
                 get_song_titles(["Test", "Test2"]), ["Response", "Response2"]
             )
+
+
+class FlaskTest(unittest.TestCase):
+    # check for response 200
+    def test_index(self):
+        tester = app.test_client(self)
+        response = tester.get("/")
+        statuscode = response.status_code
+        self.assertEqual(statuscode, 200)
+
+    # checks if user is loaded on to page
+    @patch("flask_login.utils._get_user")
+    def test_current_user(self, current_user):
+        user = MagicMock()
+        user.__repr__ = lambda self: "Mr Mocked"
+        current_user.return_value = user
+        client = app.test_client()
+        response = client.get("/profilePage")
+        data = response.data.decode("utf-8")
 
 
 if __name__ == "__main__":

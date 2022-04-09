@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <h3 className="ScoreDisplay">{score}</h3>
-      <h3 ClassName="Time">{time}</h3>
+      <h3 className="Time">{time}</h3>
       <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">

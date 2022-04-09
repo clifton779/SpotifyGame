@@ -2,6 +2,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 from api import get_song_urls, get_song_titles
+from app import app
 
 
 class GetSongUrls(unittest.TestCase):

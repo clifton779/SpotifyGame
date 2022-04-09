@@ -14,7 +14,7 @@ import api
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder="templates")
 
 bp = flask.Blueprint(
     "bp",
@@ -37,7 +37,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = "app.login"
 login_manager.init_app(app)
 
-genre = ["pop"]
+genre = ["rock"]
 
 
 @login_manager.user_loader
@@ -162,7 +162,7 @@ def logout():
 
 @app.route("/choosegenre", methods=["POST", "GET"])
 def choose_genre():
-    genres = ["rock", "pop"]
+    genres = ["    ", "rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
         return flask.redirect(flask.url_for("choose_genre"))
@@ -206,7 +206,9 @@ def get_songs():
     print(names)
     jsondata = []
     for url, name in zip(urls, names):
-        jsondata.append({"url": url, "name": name})
+        if not url.find("No Preview Available At This Time") > -1:
+            jsondata.append({"url": url, "name": name})
+            print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 
 

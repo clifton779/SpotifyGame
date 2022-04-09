@@ -63,16 +63,31 @@ function App() {
 
   return (
     <div className="App">
+      <h3 className="stylehead">Your current score is:</h3>
       <h3 className="ScoreDisplay">{score}</h3>
+      <h3 className="stylehead">Time elapsed:</h3>
       <h3 className="Time">{time}</h3>
       <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">
+        <p>Enter your guessed song name here</p>
         <p>{guessing}</p>
         <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />
         <br />
         <br />
         <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
+       </div>
+        <br />
+        <br />
+       <div>
+            <a href="choosegenre">  
+            <button type="button">Change genre</button>  
+            </a>
+            &nbsp;
+            &nbsp;
+            <a href="logout">  
+           <button type="button">Log Out</button>  
+            </a>
       </div>
     </div>
   );

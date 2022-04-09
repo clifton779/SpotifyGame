@@ -28,14 +28,16 @@ function App() {
   // This function will increment the song and when it reaches 5 it will reset to 0
   const nextSong = () => {
     if (next === 5) {
-      setNext(0);
+      setNext(1);
       setSong(music[next].url);
       setName(music[next].name);
     } else {
       setNext(next + 1);
       setSong(music[next].url);
       setName(music[next].name);
+      console.log('else');
     }
+    console.log('if-else-exit');
   };
   // This prompts the user if their guess is right, sets the score, and goes to the next song.
   const handleClick = () => {
@@ -65,16 +67,31 @@ function App() {
 
   return (
     <div className="App">
+      <h3>Your current score is: </h3>
       <h3 className="ScoreDisplay">{score}</h3>
-      <h3 lassName="time">{time}</h3>
+      <h3>Time elapsed: </h3>
+      <h3 className="time">{time}</h3>
       <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">
+        <p>Enter your guessed Song name here</p>
         <p>{guessing}</p>
         <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />
         <br />
         <br />
         <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
+      </div>
+      <br />
+      <br />
+      <div className="button_style">
+        <a href="choosegenre">
+          <button type="button">Change Genre</button>
+        </a>
+        &nbsp;
+        &nbsp;
+        <a href="logout">
+          <button type="button">Log Out</button>
+        </a>
       </div>
     </div>
   );

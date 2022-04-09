@@ -4,10 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Genre Select</title>
+    <style>
+            #temp-user{
+                text-align: center;
+                color: black;
+                margin: 8%;
+                
+            }
+          body {
+
+            background-color: #ffe9e3;
+            max-width: 100%;
+            height: auto; 
+            
+         }
+      </style>
 </head>
 
 <body>
-<label for="genres">Choose a Genre!</label>
+<h1 id="temp-user" >Choose a Genre!</h1>
+<center>
+	<div id="temp-user">
 <form method="POST" action="/choosegenre">
     <select name= genres>
     {% for genre in genres %}
@@ -17,6 +34,8 @@
     <input type="submit" value="Submit"/>
     <button type="submit" formaction="/gamepage">Play Game</button>
 </form>
+</div>
+</center>
 </body>
 
 </html>

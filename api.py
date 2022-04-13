@@ -23,7 +23,7 @@ def search_genre(genre):
         for track in items:
             url = track["preview_url"]
             uri = track["uri"]
-            if url != None:
+            if url is not None:
                 uri_array.append(uri)
             if len(uri_array) == 5:
                 break

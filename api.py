@@ -59,6 +59,3 @@ def get_song_titles(song_arr):
     for track in tracks:
         url_arr.append(track["name"])
     return url_arr
-
-
-print(search_genre("rock"))

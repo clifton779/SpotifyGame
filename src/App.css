@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.stylehead{
+  text-align: center;
+  color: black;
+  padding-left: 5%;
+  padding-right: 5%
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

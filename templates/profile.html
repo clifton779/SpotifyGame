@@ -4,9 +4,18 @@
         <style>
             #temp-user{
                 text-align: center;
-                color: blue;
+                color: black;
+                margin: 8%;
+                
             }
-        </style>
+          body {
+
+            background-color: #E0FFFF;
+            max-width: 100%;
+            height: auto; 
+            
+         }
+      </style>
     </head>
 
     <body>
@@ -17,16 +26,22 @@
             {% endif %}
          </div>
          <!-- end user's name -->
-         <div>
+          <h2 id="temp-user">Welcome to Song Guessing Game</h2>
+         <center>
+             
+         
+        <div>
+            <a href="choosegenre">  
+            <button> Click me to Start! </button>  
+            </a>
+        </div>
+        <div id="temp-user"></div>
+        <div>
             <a href="logout">  
             <button>Log Out</button>  
             </a>
         </div>
-        <div>
-            <a href="choosegenre">  
-            <button> Play Game</button>  
-            </a>
-        </div>
+        </center>
     </body>
-	
+    
 </html>

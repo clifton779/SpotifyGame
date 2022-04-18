@@ -1,6 +1,8 @@
+"""Main Server Page"""
 # pylint: disable=too-few-public-methods
 # pylint: disable=too-many-locals
 # pylint: disable=no-member
+# pylint: disable=consider-using-f-string
 import os
 from dotenv import find_dotenv, load_dotenv
 import flask
@@ -57,6 +59,7 @@ class User(db.Model, UserMixin):
 
     @property
     def password(self):
+        """defines password"""
         raise AttributeError("password is not a readable attribute!")
 
     @password.setter
@@ -64,6 +67,7 @@ class User(db.Model, UserMixin):
         self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
+        """Function to verify password"""
         return check_password_hash(self.password_hash, password)
 
     # Create A String
@@ -161,7 +165,9 @@ def logout():
 
 
 @app.route("/choosegenre", methods=["POST", "GET"])
+@login_required
 def choose_genre():
+    """Function to set genre"""
     genres = ["    ", "rock", "pop"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
@@ -169,11 +175,14 @@ def choose_genre():
     return flask.render_template("game.html", genres=genres)
 
 
+@login_required
 @bp.route("/gamepage", methods=["POST", "GET"])
 def gamepage():
+    """Function to direct to React page"""
     return flask.render_template("index.html")
 
 
+@login_required
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs():
     """From genre, gets song data and returns to react"""
@@ -214,6 +223,7 @@ def get_songs():
 
 app.register_blueprint(bp)
 
-app.run(
-    host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
-)
+if __name__ == "__main__":
+    app.run(
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", "8080")), debug=True
+    )

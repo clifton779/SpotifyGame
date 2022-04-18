@@ -12,8 +12,7 @@ function App() {
   const inputRef = useRef();
   const timeRef = useRef(); // to get data from Timer componet
   const [score, setScore] = useState(0);
-  const [next, setNext] = useState(0);
-  console.log(next);
+  const [next, setNext] = useState(1);
 
   useEffect(() => {
     fetch('/getsongs')
@@ -27,7 +26,7 @@ function App() {
 
   // This function will increment the song and when it reaches 5 it will reset to 0
   const nextSong = () => {
-    if (next === 5) {
+    if (next === 4) {
       setNext(0);
       setSong(music[next].url);
       setName(music[next].name);
@@ -44,7 +43,6 @@ function App() {
     if (val === name) {
       setGuessing('Correct!');
       setScore(score + 1);
-      nextSong();
     } else {
       setGuessing('Wrong Song.');
       setScore(() => {
@@ -65,16 +63,31 @@ function App() {
 
   return (
     <div className="App">
+      <h3 className="stylehead">Your current score is:</h3>
       <h3 className="ScoreDisplay">{score}</h3>
-      <h3 lassName="time">{time}</h3>
+      <h3 className="stylehead">Time elapsed:</h3>
+      <h3 className="Time">{time}</h3>
       <Player url={song} />
       <Timer ref={timeRef} />
       <div className="GuessBox">
+        <p>Enter your guessed song name here</p>
         <p>{guessing}</p>
         <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />
         <br />
         <br />
         <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
+      </div>
+      <br />
+      <br />
+      <div>
+        <a href="choosegenre">
+          <button type="button">Change genre</button>
+        </a>
+            &nbsp;
+            &nbsp;
+        <a href="logout">
+          <button type="button">Log Out</button>
+        </a>
       </div>
     </div>
   );

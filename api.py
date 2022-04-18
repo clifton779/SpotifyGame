@@ -11,6 +11,27 @@ def authorization():
     return spotipy.Spotify(auth_manager=auth_manager)
 
 
+def search_genre(genre):
+    """Search tracks in a genre"""
+    spotify = authorization()
+    uri_array = []
+    results = spotify.search("genre:" + genre, 5)
+    while len(uri_array) < 5:
+        tracks = results["tracks"]
+        items = tracks["items"]
+
+        for track in items:
+            url = track["preview_url"]
+            uri = track["uri"]
+            if url is not None:
+                uri_array.append(uri)
+            if len(uri_array) == 5:
+                break
+        results = spotify.next(tracks)
+
+    return uri_array
+
+
 def get_song_urls(song_arr):
     """Gets song urls"""
     url_arr = []

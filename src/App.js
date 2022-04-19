@@ -102,7 +102,7 @@ function App() {
           <h3 className="ScoreDisplay">{score}</h3>
         </div>
         <div className="gotoleaderboard">
-          <ReturnScore next={next} score={score} />
+          <ReturnScore score={score} />
         </div>
       )}
       <div>

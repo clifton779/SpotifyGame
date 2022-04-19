@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import Player from './Player';
 import Timer from './Timer';
+import ReturnScore from './returnScore';
 
 function App() {
   const [time, setTime] = useState(null);
@@ -37,6 +38,7 @@ function App() {
       setName(music[next].name);
     }
   };
+
   // This prompts the user if their guess is right, sets the score, and goes to the next song.
   const handleClick = () => {
     setNumClicks(numClicks + 1);
@@ -98,6 +100,9 @@ function App() {
           <h1>Game Over</h1>
           <h2>Final Score:</h2>
           <h3 className="ScoreDisplay">{score}</h3>
+        </div>
+        <div className="gotoleaderboard">
+          <ReturnScore score={score} />
         </div>
       )}
       <div>

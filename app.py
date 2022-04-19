@@ -3,10 +3,11 @@
 # pylint: disable=too-many-locals
 # pylint: disable=no-member
 # pylint: disable=consider-using-f-string
+from json.encoder import INFINITY
 import os
 from dotenv import find_dotenv, load_dotenv
 import flask
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, current_user
 from flask_login import login_user, login_required, logout_user
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -74,6 +75,10 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return "<Name %r>" % self.name
 
+class Leaderboard(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer, nullable = False, unique = False)
+    username = db.Column(db.String(50), nullable=False, unique=False)
 
 db.create_all()
 
@@ -181,6 +186,23 @@ def gamepage():
     """Function to direct to React page"""
     return flask.render_template("index.html")
 
+@bp.route("/leaderboard", methods=["POST", "GET"])
+@login_required
+def leaderboard():
+    scored = ""
+    if flask.request.method == "POST":
+        scored = flask.request.form.get("score", type=int)
+        scores = Leaderboard(
+                            score = scored,
+                            username = current_user.username
+                            )
+        db.session.add(scores)
+        db.session.commit()
+
+    allscores = Leaderboard.query.order_by(Leaderboard.score.desc())
+    lensco = Leaderboard.query.all()
+    len_allscores = len(lensco)
+    return flask.render_template("leaderboard.html", score=scored, allscores = allscores, len_allscores=len_allscores)
 
 @login_required
 @bp.route("/getsongs", methods=["POST", "GET"])

@@ -104,7 +104,7 @@ function App() {
         <div className="gotoleaderboard">
           <ReturnScore score={score} />
         </div>
-      )}
+      )>}
       <div>
         <a href="choosegenre">
           <button type="button">Change genre</button>

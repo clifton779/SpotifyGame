@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ReturnScore({ next, score }) {
-  if (next === 1) {
+export default function ReturnScore({ score }) {
     const retscore = String(score);
     return (
       <form method="POST" action="/leaderboard">
@@ -12,10 +11,8 @@ export default function ReturnScore({ next, score }) {
         <input type="submit" value="View My Ranking!" id="submit-btn" />
       </form>
     );
-  }
 }
 
 ReturnScore.propTypes = {
-  next: PropTypes.number.isRequired,
   score: PropTypes.number.isRequired,
 };

@@ -75,10 +75,12 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return "<Name %r>" % self.name
 
+
 class Leaderboard(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    score = db.Column(db.Integer, nullable = False, unique = False)
+    score = db.Column(db.Integer, nullable=False, unique=False)
     username = db.Column(db.String(50), nullable=False, unique=False)
+
 
 db.create_all()
 
@@ -186,23 +188,27 @@ def gamepage():
     """Function to direct to React page"""
     return flask.render_template("index.html")
 
+
 @bp.route("/leaderboard", methods=["POST", "GET"])
 @login_required
 def leaderboard():
     scored = ""
     if flask.request.method == "POST":
         scored = flask.request.form.get("score", type=int)
-        scores = Leaderboard(
-                            score = scored,
-                            username = current_user.username
-                            )
+        scores = Leaderboard(score=scored, username=current_user.username)
         db.session.add(scores)
         db.session.commit()
 
     allscores = Leaderboard.query.order_by(Leaderboard.score.desc())
     lensco = Leaderboard.query.all()
     len_allscores = len(lensco)
-    return flask.render_template("leaderboard.html", score=scored, allscores = allscores, len_allscores=len_allscores)
+    return flask.render_template(
+        "leaderboard.html",
+        score=scored,
+        allscores=allscores,
+        len_allscores=len_allscores,
+    )
+
 
 @login_required
 @bp.route("/getsongs", methods=["POST", "GET"])
@@ -210,23 +216,26 @@ def get_songs():
     """From genre, gets song data and returns to react"""
     urls = []
     names = []
+    images = []
     print(genre)
     if genre[0] == "rock":
         uris = api.search_genre("rock")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
+        images = api.get_song_urls(uris)
     elif genre[0] == "pop":
         uris = api.search_genre("pop")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
+        images = api.get_song_urls(uris)
 
     print(urls)
 
     print(names)
     jsondata = []
-    for url, name in zip(urls, names):
+    for url, name, image in zip(urls, names, images):
         if not url.find("No Preview Available At This Time") > -1:
-            jsondata.append({"url": url, "name": name})
+            jsondata.append({"url": url, "name": name, "image": image})
             print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 

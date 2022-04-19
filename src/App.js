@@ -99,6 +99,14 @@ function App() {
         <>
           <div>
             <h1>Game Over</h1>
+            <table>
+              {music && music.map((track) => (
+                <tr>
+                  <td><img src={track.image} alt="Album Cover" /></td>
+                  <td>{track.name}</td>
+                </tr>
+              ))}
+            </table>
             <h2>Final Score:</h2>
             <h3 className="ScoreDisplay">{score}</h3>
           </div>

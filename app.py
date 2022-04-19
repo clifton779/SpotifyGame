@@ -222,12 +222,12 @@ def get_songs():
         uris = api.search_genre("rock")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
-        images = api.get_song_urls(uris)
+        images = api.get_album_cover(uris)
     elif genre[0] == "pop":
         uris = api.search_genre("pop")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
-        images = api.get_song_urls(uris)
+        images = api.get_album_cover(uris)
 
     print(urls)
 

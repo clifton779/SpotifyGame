@@ -96,14 +96,16 @@ function App() {
           <br />
         </div>
       ) : (
-        <div>
-          <h1>Game Over</h1>
-          <h2>Final Score:</h2>
-          <h3 className="ScoreDisplay">{score}</h3>
-        </div>
-        <div className="gotoleaderboard">
-          <ReturnScore score={score} />
-        </div>
+        <>
+          <div>
+            <h1>Game Over</h1>
+            <h2>Final Score:</h2>
+            <h3 className="ScoreDisplay">{score}</h3>
+          </div>
+          <div className="gotoleaderboard">
+            <ReturnScore score={score} />
+          </div>
+        </>
       )}
       <div>
         <a href="choosegenre">

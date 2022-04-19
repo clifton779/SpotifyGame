@@ -1,0 +1,25 @@
+<html>
+    <head>
+    </head>
+    <body>
+        {% if current_user.is_authenticated %}
+        <h2 id="username">{{ current_user.username }}</h2>
+        {% endif %}
+        <h3>Your Score: </h3><h3 id="score">{{score}}</h3>   
+        <table width="500px" cellspacing="1px" cellpadding="1px" border="1px">
+            <h3>LeaderBoard</h3>
+            <tr>
+                <td style="font-weight: bold;">Rank</td>
+                <td style="font-weight: bold;">Username</td>
+                <td style="font-weight: bold;">Score</td>
+            </tr>
+            {% for i in range(len_allscores)%}
+            <tr>
+                <td id = "{{i}}">{{i+1}}</td>
+                <td id="username">{{allscores[i].username}}</td>
+                <td id="scores">{{allscores[i].score}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

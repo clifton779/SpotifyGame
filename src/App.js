@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react';
 import Player from './Player';
 import Timer from './Timer';
+import ReturnScore from './returnScore';
 
 function App() {
   const [time, setTime] = useState(null);
@@ -36,6 +37,7 @@ function App() {
       setName(music[next].name);
     }
   };
+
   // This prompts the user if their guess is right, sets the score, and goes to the next song.
   const handleClick = () => {
     setTime(timeRef.current.getTime / 1000); // gets time in seconds
@@ -76,6 +78,11 @@ function App() {
         <br />
         <br />
         <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
+      </div>
+      <br />
+      <br />
+      <div className="gotoleaderboard">
+        <ReturnScore next={next} score={score} />
       </div>
       <br />
       <br />

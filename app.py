@@ -208,29 +208,17 @@ def leaderboard():
 @bp.route("/getsongs", methods=["POST", "GET"])
 def get_songs():
     """From genre, gets song data and returns to react"""
-    rock = [
-        "spotify:track:1QEEqeFIZktqIpPI4jSVSF",
-        "spotify:track:4xlEKYv7HmC8zXoJIbpZKM",
-        "spotify:track:4sebUbjqbcgDSwG6PbSGI0",
-        "spotify:track:305WCRhhS10XUcH6AEwZk6",
-        "spotify:track:2zYzyRzz6pRmhPzyfMEC8s",
-    ]
-    pop = [
-        "spotify:track:5sbooPcNgIE22DwO0VNGUJ",
-        "spotify:track:0k4d5YPDr1r7FX77VdqWez",
-        "spotify:track:2XU0oxnq2qxCpomAAuJY8K",
-        "spotify:track:0F7FA14euOIX8KcbEturGH",
-        "spotify:track:1tNJrcVe6gwLEiZCtprs1u",
-    ]
     urls = []
     names = []
     print(genre)
     if genre[0] == "rock":
-        urls = api.get_song_urls(rock)
-        names = api.get_song_titles(rock)
+        uris = api.search_genre("rock")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
     elif genre[0] == "pop":
-        urls = api.get_song_urls(pop)
-        names = api.get_song_titles(pop)
+        uris = api.search_genre("pop")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
 
     print(urls)
 

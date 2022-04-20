@@ -104,6 +104,7 @@ function App() {
                 <tr>
                   <td><img src={track.image} alt="Album Cover" /></td>
                   <td>{track.name}</td>
+                  <td>{track.artist}</td>
                 </tr>
               ))}
             </table>

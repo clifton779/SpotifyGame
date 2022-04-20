@@ -59,3 +59,16 @@ def get_song_titles(song_arr):
     for track in tracks:
         url_arr.append(track["name"])
     return url_arr
+
+
+def get_album_cover(song_arr):
+    """Get album images"""
+    img_arr = []
+    if song_arr is None:
+        return "Error: No Genre Chosen"
+    spotify = authorization()
+    results = spotify.tracks(song_arr)
+    tracks = results["tracks"]
+    for track in tracks:
+        img_arr.append(track["album"]["images"][1]["url"])
+    return img_arr

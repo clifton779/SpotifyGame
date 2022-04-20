@@ -90,7 +90,7 @@ function App() {
             <input className="GuessInput" type="text" ref={inputRef} data-testid="input-field" />
             <br />
             <br />
-            <button className="GuessButton" type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
+            <button type="button" onClick={() => { handleClick(); handleReset(); }}>Submit</button>
           </div>
           <br />
           <br />

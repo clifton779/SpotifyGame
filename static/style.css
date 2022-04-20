@@ -1,0 +1,106 @@
+html, body {
+  margin:0;
+  height:100%;
+}
+.signup-img{
+    background-image: url('/static/music_5.jpeg');
+    background-size: 100%;
+    height: 100vh;
+    width: 100vw;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile_img{
+background-image: url('/static/music_2.jpeg');
+    background-size: 100%;
+    height: 100vh;
+    width: 100vw;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.game_img{
+    background-image: url('/static/music_bg.png');
+    background-size: 100%;
+    height: 100vh;
+    width: 100vw;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.form-control{
+	width: 50%;
+  border-radius: 8px;
+}
+
+.align_right{
+	float: right;
+	width: 50vw;
+	margin: 20vh; 
+}
+.login-img{
+    background-image: url('/static/music_8.jpeg');
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+   
+}
+button{
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+  color: black;
+  background-color: white;
+  padding: 10px;
+
+}
+#submit-btn, #submitID{
+  margin: 10px;
+  border: 2px solid black;
+  border-radius: 8px;
+  color: black;
+  background-color: white;
+  padding: 10px;
+
+}
+table{
+  padding: 2px;
+  text-align: center;
+}
+table, th, td {
+  border:1px solid black;
+  margin: 4px;
+  padding: 10px;
+  border-radius: 8px;
+}
+select{
+  height: 40px;
+  width: 18%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+.start_game{
+  height: 60px;
+  width: 20vw;
+
+}
+.genre_play{
+  margin-top: 60vh;
+}
+.bg_clr{
+background-color: #ffe9e3;
+}
+h1, p, label{
+	color: black;
+}
+

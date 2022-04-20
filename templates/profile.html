@@ -1,46 +1,52 @@
 <html>
-    <head>        
+    <head>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">        
         <title>Profile Page</title>
-        <style>
-            #temp-user{
-                text-align: center;
-                color: black;
-                margin: 8%;
-                
-            }
-          body {
-
-            background-color: #E0FFFF;
-            max-width: 100%;
-            height: auto; 
-            
-         }
-      </style>
     </head>
 
     <body>
          <!-- user's name -->
-         <div id="temp-user">
+          <center><div class="profile_img text_pos">
             {% if current_user.is_authenticated %}
              <h2>Hi {{ current_user.username }}!</h2>
             {% endif %}
-         </div>
          <!-- end user's name -->
-          <h2 id="temp-user">Welcome to Song Guessing Game</h2>
-         <center>
-             
-         
+         <br>
+          <h4>Welcome to Song Guessing Game</h4>
+          <br>
+          <div>
+           <table >
+            <h4>Here are your scores till now! </h4>
+            <tr>
+                <td style="font-weight: bold;">Rank</td>
+                <td style="font-weight: bold;">Username</td>
+                <td style="font-weight: bold;">Score</td>
+            </tr>
+            {% for i in range(len_user_scores)%}
+            <tr>
+                <td id = "{{i}}">{{i+1}}</td>
+                <td id="username">{{user_scores[i].username}}</td>
+                <td id="scores">{{user_scores[i].score}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+      </div>
+      <br>
+      <br>
         <div>
             <a href="choosegenre">  
-            <button> Click me to Start! </button>  
+            <button class="start_game"><b> Click me to Start! </b></button>  
             </a>
         </div>
-        <div id="temp-user"></div>
         <div>
             <a href="logout">  
             <button>Log Out</button>  
             </a>
         </div>
+      </div>
         </center>
     </body>
     

@@ -2,41 +2,38 @@
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css">
     <meta charset="UTF-8">
     <title>Genre Select</title>
-    <style>
-        #temp-user {
-            text-align: center;
-            color: black;
-            margin: 8%;
-
-        }
-
-        body {
-
-            background-color: #ffe9e3;
-            max-width: 100%;
-            height: auto;
-
-        }
-    </style>
+    
 </head>
 
 <body>
-    <h1 id="temp-user">Choose a Genre!</h1>
-    <center>
-        <div id="temp-user">
-            <form method="POST" action="/choosegenre">
-                <select name=genres>
-                    {% for genre in genres %}
-                    <option value="{{genre}}">{{genre}}</option>"
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Submit" />
-                <button type="submit" formaction="/gamepage">Play Game</button>
-            </form>
-        </div>
-    </center>
+    <center><div class="game_img">
+<h1>Choose a Genre!</h1>
+<center>
+    <div>
+        <div class="select_genre">
+<form method="POST" action="/choosegenre">
+    <select name= genres>
+    {% for genre in genres %}
+    <option value= "{{genre}}">{{genre}}</option>"
+    {% endfor %}
+    </select>
+
+    <input id="submit-btn" type="submit" value="Choose Genre!"/>
+</div>
+    <div>
+    <button class="start_game" type="submit" formaction="/gamepage">Play Game</button>
+</div>
+</form>
+</div>
+</center>
+</div>
+</center>
 </body>
 
 </html>

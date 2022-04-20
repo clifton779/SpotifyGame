@@ -160,7 +160,9 @@ def login():
 @login_required
 def profile():
     """This function is used for users to view profile"""
-    return flask.render_template("profile.html")
+    user_scores = Leaderboard.query.filter_by(username=current_user.username).all()
+    len_user_scores = len(user_scores)
+    return flask.render_template("profile.html", username=current_user.username, user_scores=user_scores, len_user_scores=len_user_scores)
 
 
 @app.route("/logout")
@@ -175,7 +177,7 @@ def logout():
 @login_required
 def choose_genre():
     """Function to set genre"""
-    genres = ["    ", "rock", "pop"]
+    genres = ["    ", "rock", "pop", "folk", "country", "metal", "classical", "jazz"]
     if flask.request.method == "POST":
         genre[0] = flask.request.form["genres"]
         return flask.redirect(flask.url_for("choose_genre"))
@@ -225,6 +227,31 @@ def get_songs():
         images = api.get_album_cover(uris)
     elif genre[0] == "pop":
         uris = api.search_genre("pop")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
+        images = api.get_album_cover(uris)
+    elif genre[0] == "folk":
+        uris = api.search_genre("folk")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
+        images = api.get_album_cover(uris)
+    elif genre[0] == "country":
+        uris = api.search_genre("country")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
+        images = api.get_album_cover(uris)
+    elif genre[0] == "metal":
+        uris = api.search_genre("metal")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
+        images = api.get_album_cover(uris)
+    elif genre[0] == "classical":
+        uris = api.search_genre("classical")
+        urls = api.get_song_urls(uris)
+        names = api.get_song_titles(uris)
+        images = api.get_album_cover(uris)
+    elif genre[0] == "jazz":
+        uris = api.search_genre("jazz")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)

@@ -1,19 +1,21 @@
 <html>
     <head>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
+  <link rel="stylesheet" href="/static/style.css">
+ </head>
+ 
     <body>
-
-      <div class="container">
-      <center><div>
+     <div class="container signup-img">
+      <center><div class="align_right">
       <h1 >Sign Up</h1></br>
       <p>If you haven't already</p></br>
         <form class="form-group" method="POST" action="/signUpPage">
          <div>
               <label for="username">Username</label>
-              <input type="text" class="form-control" name="username" id="username" aria-describedby="username-entry" placeholder="Enter Username">
+              <input type="text" class="form-control" name="username" id="username" aria-describedby="username-entry" placeholder="Enter Username" required>
              
             </div></br>
             <div class="form-group">
@@ -24,14 +26,15 @@
               <label for="password_hash2">Confirm Password</label>
               <input type="password" class="form-control" name="password_hash2" id="password_hash2" placeholder="Confirm Password" onkeyup="checkPass();">
             </div><br/>
-           <input type="submit" id= "submitID" value="Submit!">
+           <input type="submit" id= "submitID" value="Sign Up!">
            <p class="missmatch"></p>
         </form>
 
        <a href="/loginPage" >Click here to Login!</a>
   </div></center>
-</div>
+    </div>
     </body>
+ 
 <script type="text/javascript">
   
   var value = {{value}}

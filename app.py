@@ -162,7 +162,12 @@ def profile():
     """This function is used for users to view profile"""
     user_scores = Leaderboard.query.filter_by(username=current_user.username).all()
     len_user_scores = len(user_scores)
-    return flask.render_template("profile.html", username=current_user.username, user_scores=user_scores, len_user_scores=len_user_scores)
+    return flask.render_template(
+        "profile.html",
+        username=current_user.username,
+        user_scores=user_scores,
+        len_user_scores=len_user_scores,
+    )
 
 
 @app.route("/logout")
@@ -219,50 +224,60 @@ def get_songs():
     urls = []
     names = []
     images = []
+    artists = []
     print(genre)
     if genre[0] == "rock":
         uris = api.search_genre("rock")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "pop":
         uris = api.search_genre("pop")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "folk":
         uris = api.search_genre("folk")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "country":
         uris = api.search_genre("country")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "metal":
         uris = api.search_genre("metal")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "classical":
         uris = api.search_genre("classical")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
     elif genre[0] == "jazz":
         uris = api.search_genre("jazz")
         urls = api.get_song_urls(uris)
         names = api.get_song_titles(uris)
         images = api.get_album_cover(uris)
+        artists = api.get_artist(uris)
 
     print(urls)
 
     print(names)
     jsondata = []
-    for url, name, image in zip(urls, names, images):
+    for url, name, image, artist in zip(urls, names, images, artists):
         if not url.find("No Preview Available At This Time") > -1:
-            jsondata.append({"url": url, "name": name, "image": image})
+            jsondata.append(
+                {"url": url, "name": name, "image": image, "artist": artist}
+            )
             print(str(jsondata))
     return flask.jsonify({"songs": jsondata})
 
